@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="google-site-verification" content="bfMgXDJ1fhi5uNuOGqsoywUEXoFRFU_ymmDIc0OqHek"/>
+<title>nkunda</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .chat-container {
+      width: 400px;
+      height: 500px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-box {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ddd;
+    }
+    .input-box {
+      display: flex;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border-top: 1px solid #ddd;
+    }
+    .input-box input {
+      flex-grow: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .input-box button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .input-box button:hover {
+      background-color: #45a049;
+    }
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .user-message {
+      background-color: #DCF8C6;
+      align-self: flex-end;
+    }
+    .bot-message {
+      background-color: #EAEAEA;
+      align-self: flex-start;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+    <div class="input-box">
+      <input type="text" id="userInput" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const userInput = document.getElementById("userInput").value;
+      if (userInput.trim() !== "") {
+        displayMessage(userInput, "user");
+        document.getElementById("userInput").value = ""; // Clear input
+
+        // Simulate bot response
+        setTimeout(() => {
+          const botResponse = generateBotResponse(userInput);
+          displayMessage(botResponse, "bot");
+        }, 1000);
+      }
+    }
+
+    function displayMessage(message, sender) {
+      const chatBox = document.getElementById("chatBox");
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add("message");
+      messageDiv.classList.add(sender === "user" ? "user-message" : "bot-message");
+      messageDiv.innerText = message;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+    }
+
+    function generateBotResponse(userMessage) {
+      // Simulate a basic bot response (could be enhanced with AI or API calls)
+      const responses = {
+        "hi": "Hello! How can I help you?",
+        "how are you": "I'm just a bot, but I'm doing fine. How about you?",
+        "bye": "Goodbye! Have a great day!",
+      };
+      return responses[userMessage.toLowerCase()] || "I'm not sure how to respond to that.";
+    }
+  </script>
+</body>
+</html>
